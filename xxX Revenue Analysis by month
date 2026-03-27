@@ -1,0 +1,25 @@
+#1. Total revenue by Month.
+SELECT 
+    DATE_FORMAT(order_date, '%Y-%m') AS month,
+    SUM(total_amount) AS revenue
+FROM orders
+GROUP BY month
+ORDER BY month;
+
+#Month over Month Growth
+WITH revenue AS (
+    SELECT 
+        DATE_FORMAT(order_date, '%Y-%m') AS month,
+        SUM(total_amount) AS revenue
+    FROM orders
+    GROUP BY month
+)
+SELECT 
+    month,
+    revenue,
+    LAG(revenue) OVER (ORDER BY month) AS prev_month,
+    ROUND(
+        (revenue - LAG(revenue) OVER (ORDER BY month)) 
+        / LAG(revenue) OVER (ORDER BY month) * 100, 2
+    ) AS growth_pct
+FROM revenue;
