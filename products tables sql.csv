@@ -1,0 +1,11 @@
+product_id,product_name,category
+1,"iPhone 14",Electronics
+2,"Samsung TV",Electronics
+3,Laptop,Electronics
+4,"Nike Shoes",Fashion
+5,"Adidas T-shirt",Fashion
+6,"Washing Machine",Appliances
+7,Refrigerator,Appliances
+8,"Smart Watch",Electronics
+9,Backpack,Accessories
+10,Headphones,Electronics
