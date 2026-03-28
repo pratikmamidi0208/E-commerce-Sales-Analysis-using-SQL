@@ -1,0 +1,46 @@
+#PRODUCT LEVEL ANALYSIS#
+#1. Revenue by Product.
+
+SELECT 
+    p.product_name,
+    SUM(oi.quantity * oi.price) AS revenue
+FROM order_items oi
+JOIN products p ON oi.product_id = p.product_id
+GROUP BY p.product_name
+ORDER BY revenue DESC;
+
+#2. Quantity sold per product
+
+SELECT 
+    p.product_name,
+    SUM(oi.quantity) AS total_units
+FROM order_items oi
+JOIN products p ON oi.product_id = p.product_id
+GROUP BY p.product_name
+ORDER BY total_units DESC;
+
+#3. Category wise revenue.
+SELECT 
+    p.category,
+    SUM(oi.quantity * oi.price) AS revenue
+FROM order_items oi
+JOIN products p ON oi.product_id = p.product_id
+GROUP BY p.category
+ORDER BY revenue DESC;
+
+#4. Average price per product.
+SELECT 
+    p.product_name,
+    AVG(oi.price) AS avg_price
+FROM order_items oi
+JOIN products p ON oi.product_id = p.product_id
+GROUP BY p.product_name;
+
+SELECT 
+    p.product_name,
+    SUM(oi.quantity * oi.price) AS revenue
+FROM order_items oi
+JOIN products p ON oi.product_id = p.product_id
+GROUP BY p.product_name
+ORDER BY revenue DESC
+LIMIT 5;
