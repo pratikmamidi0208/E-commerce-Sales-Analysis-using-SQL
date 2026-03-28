@@ -44,3 +44,19 @@ JOIN products p ON oi.product_id = p.product_id
 GROUP BY p.product_name
 ORDER BY revenue DESC
 LIMIT 5;
+
+#5. Product Contribution Query
+
+use ecommerce_project;
+SELECT 
+    p.product_name,
+    SUM(oi.quantity * oi.price) AS revenue,
+    ROUND(
+        SUM(oi.quantity * oi.price) * 100.0 
+        / SUM(SUM(oi.quantity * oi.price)) OVER (), 
+        2
+    ) AS contribution_pct
+FROM order_items oi
+JOIN products p ON oi.product_id = p.product_id
+GROUP BY p.product_name
+ORDER BY revenue DESC;
